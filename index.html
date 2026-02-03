@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro moji Valentýnku ❤️</title>
+    <title>Budeš moje Valentýnka? ❤️</title>
     <style>
         body {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -11,7 +11,7 @@
             background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
             overflow: hidden; position: relative; text-align: center;
         }
-        h1 { color: #d63384; font-size: 2.2rem; z-index: 10; padding: 0 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #d63384; font-size: 2.2rem; z-index: 10; padding: 0 20px; }
         .buttons { display: flex; gap: 20px; margin-top: 30px; z-index: 10; align-items: center; justify-content: center; }
         #yesBtn, #noBtn {
             border: none; padding: 15px 30px; font-size: 18px; border-radius: 50px;
@@ -20,9 +20,9 @@
         }
         #yesBtn { background-color: #ff477e; color: white; z-index: 12; }
         #noBtn { background-color: #999; color: white; z-index: 11; white-space: nowrap; }
-        .main-img { width: 220px; border-radius: 20px; margin-bottom: 20px; z-index: 10; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .main-img { width: 220px; border-radius: 20px; margin-bottom: 20px; z-index: 10; }
 
-        /* ANIMACE SRDÍČEK */
+        /* SRDÍČKA */
         .heart {
             position: absolute; background-color: #ff4d6d;
             width: 15px; height: 15px; transform: rotate(-45deg);
@@ -42,7 +42,7 @@
     </style>
 </head>
 <body>
-    <img src="https://img.freepik.com/free-vector/cute-teddy-bear-holding-rose-cartoon-vector-icon-illustration_138676-3243.jpg" class="main-img" id="bearImg">
+    <img src="https://img.freepik.com/free-vector/cute-teddy-bear-holding-red-rose-cartoon-vector-icon-illustration-animal-nature-icon-concept_138676-4357.jpg" class="main-img" id="bearImg">
     
     <h1 id="question">Budeš moje Valentýnka? ❤️</h1>
     
@@ -61,35 +61,32 @@
             "Už mě trápíš...",
             "Slibuju, že budu hodný!",
             "Dám ti čokoládu! 🍫",
-            "Poslední šance říct ne!",
+            "Zkus to znovu!",
             "To bolelo... 😢",
             "Máš tam napsáno ANO! ✨",
             "Jen to zkus znovu! 😂"
         ];
 
         function growYes() {
-            // Drastické zvětšení tlačítka ANO
             scale += 0.8;
             const yesBtn = document.getElementById('yesBtn');
             yesBtn.style.transform = `scale(${scale})`;
 
-            // Změna textu na tlačítku NE
             const noBtn = document.getElementById('noBtn');
             if (msgIndex < messages.length) {
                 noBtn.innerText = messages[msgIndex];
                 msgIndex++;
             } else {
-                noBtn.style.display = 'none'; // Po všech zprávách tlačítko zmizí
+                noBtn.style.display = 'none';
             }
         }
 
         function celebrate() {
             document.body.innerHTML = `
-                <h1 style="color: #d63384; font-size: 3.5rem;">Jupííí! ❤️</h1>
-                <img src="https://img.freepik.com/free-vector/cute-bear-holding-love-sign-cartoon-vector-icon-illustration_138676-2673.jpg" style="width: 280px; border-radius: 20px;">
-                <h2 style="color: #ff477e; font-size: 2rem; margin-top: 20px; font-family: 'Arial';">Miluju tě! Nemůžu se dočkat! 🌹</h2>
+                <h1 style="color: #d63384; font-size: 3rem;">Jupííí! ❤️</h1>
+                <img src="https://img.freepik.com/free-vector/cute-bear-holding-love-sign-cartoon-vector-icon-illustration_138676-2673.jpg" style="width: 250px; border-radius: 20px;">
+                <h2 style="color: #ff477e; font-size: 2rem; margin-top: 20px;">Miluju tě! Nemůžu se dočkat! 🌹</h2>
             `;
-            // Exploze srdíček pro oslavu
             for(let i=0; i<30; i++) {
                 setTimeout(createHeart, i * 100);
             }
