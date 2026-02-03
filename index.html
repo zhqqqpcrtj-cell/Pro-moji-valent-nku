@@ -25,8 +25,8 @@
         #yesBtn { background-color: #ff477e; color: white; }
         #noBtn { background-color: #999; color: white; font-family: sans-serif; }
         
-        img { 
-            width: 220px; border-radius: 20px; margin-bottom: 10px; z-index: 10;
+        .main-img { 
+            width: 250px; border-radius: 20px; margin-bottom: 10px; z-index: 10;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpwaWszdzZueHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KzM1lAfJjCW3TM3p2P/giphy.gif" alt="Cute Valentine">
+    <img src="https://img.freepik.com/free-vector/cute-teddy-bear-holding-red-rose-cartoon-vector-icon-illustration-animal-nature-icon-concept_138676-4357.jpg" class="main-img" alt="Medvídek">
     
     <h1 id="question">Budeš moje Valentýnka? ❤️</h1>
     
@@ -65,36 +65,33 @@
         const messages = [
             "Jsi si jistá?", "Vážně ne? 🥺", "Zkus to znovu!", 
             "Nebuď na mě zlá!", "Už mě trápíš... 💔", 
-            "Slibuju, že budu hodný!", "Je tam napsáno ANO! ✨"
+            "Slibuju, že budu hodný!", "Klikni na ANO! ✨"
         ];
         let msgIndex = 0;
 
         function growYes() {
-            scale += 0.7;
+            scale += 0.8;
             const yesBtn = document.getElementById('yesBtn');
             yesBtn.style.transform = `scale(${scale})`;
-            
-            // Zvětšuje i stín pro efekt
-            yesBtn.style.boxShadow = `0 ${6*scale}px ${15*scale}px rgba(255, 71, 126, 0.4)`;
             
             const noBtn = document.getElementById('noBtn');
             if (msgIndex < messages.length) {
                 noBtn.innerText = messages[msgIndex];
                 msgIndex++;
             } else {
-                noBtn.style.display = 'none'; // Tlačítko NE zmizí, když už je to moc
+                noBtn.style.display = 'none';
             }
         }
 
         function celebrate() {
             document.body.innerHTML = `
                 <h1 style="color: #d63384; font-size: 4rem;">Jupííí! ❤️</h1>
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmF2ZWZ2MXpsZzV2M3p3NTR4OWtxMTNqOGZja3Q3dG53am53aW45NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lMCD8j3wSdu8h0oD1c/giphy.gif" style="width: 350px;">
+                <img src="https://img.freepik.com/free-vector/cute-bear-holding-heart-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3503.jpg" style="width: 300px; border-radius: 20px;">
                 <h2 style="color: #ff477e; font-size: 2.5rem; margin-top: 20px;">Miluju tě! Nemůžu se dočkat! 🌹</h2>
             `;
-            // Extra nálož srdíček při kliknutí na ANO
-            for(let i=0; i<50; i++) {
-                setTimeout(createHeart, i * 50);
+            // Exploze srdíček
+            for(let i=0; i<40; i++) {
+                setTimeout(createHeart, i * 30);
             }
         }
 
@@ -110,7 +107,6 @@
             setTimeout(() => { heart.remove(); }, 5000);
         }
 
-        // Spustit padání srdíček na pozadí
         setInterval(createHeart, 250);
     </script>
 </body>
