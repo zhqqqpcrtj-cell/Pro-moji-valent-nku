@@ -7,34 +7,24 @@
     <style>
         body {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100vh; margin: 0; font-family: 'Brush Script MT', cursive, sans-serif;
+            height: 100vh; margin: 0; font-family: 'Arial', sans-serif;
             background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
             overflow: hidden; position: relative; text-align: center;
         }
-        h1 { 
-            color: #d63384; font-size: 3.5rem; z-index: 10; 
-            text-shadow: 2px 2px 8px rgba(214, 51, 132, 0.3);
-            margin-bottom: 20px;
-        }
-        .buttons { display: flex; gap: 25px; margin-top: 20px; z-index: 10; align-items: center; }
+        h1 { color: #d63384; font-size: 2.5rem; z-index: 10; margin-bottom: 20px; }
+        .buttons { display: flex; gap: 20px; z-index: 10; align-items: center; }
         #yesBtn, #noBtn {
-            border: none; padding: 18px 40px; font-size: 22px; border-radius: 50px;
-            cursor: pointer; transition: all 0.3s ease; font-weight: bold;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            border: none; padding: 15px 30px; font-size: 20px; border-radius: 50px;
+            cursor: pointer; transition: 0.3s; font-weight: bold;
         }
         #yesBtn { background-color: #ff477e; color: white; }
-        #noBtn { background-color: #999; color: white; font-family: sans-serif; }
-        
-        .main-img { 
-            width: 250px; border-radius: 20px; margin-bottom: 10px; z-index: 10;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+        #noBtn { background-color: #999; color: white; }
+        .main-img { width: 200px; border-radius: 20px; margin-bottom: 10px; z-index: 10; }
 
-        /* PADAJÍCÍ SRDÍČKA */
         .heart {
             position: absolute; background-color: #ff4d6d;
             width: 15px; height: 15px; transform: rotate(-45deg);
-            animation: fall linear infinite; z-index: 1; opacity: 0.8;
+            animation: fall linear infinite; z-index: 1;
         }
         .heart::before, .heart::after {
             content: ""; position: absolute; width: 15px; height: 15px;
@@ -44,14 +34,13 @@
         .heart::after { left: 8px; top: 0; }
 
         @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(-45deg) scale(0.5); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(110vh) rotate(-45deg) scale(1.2); opacity: 0; }
+            0% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; }
+            100% { transform: translateY(110vh) rotate(-45deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <img src="https://img.freepik.com/free-vector/cute-teddy-bear-holding-red-rose-cartoon-vector-icon-illustration-animal-nature-icon-concept_138676-4357.jpg" class="main-img" alt="Medvídek">
+    <img src="https://img.freepik.com/free-vector/cute-teddy-bear-holding-heart-balloon-cartoon-vector-icon-illustration_138676-3382.jpg" class="main-img" alt="Medvídek">
     
     <h1 id="question">Budeš moje Valentýnka? ❤️</h1>
     
@@ -62,52 +51,28 @@
 
     <script>
         let scale = 1;
-        const messages = [
-            "Jsi si jistá?", "Vážně ne? 🥺", "Zkus to znovu!", 
-            "Nebuď na mě zlá!", "Už mě trápíš... 💔", 
-            "Slibuju, že budu hodný!", "Klikni na ANO! ✨"
-        ];
-        let msgIndex = 0;
-
         function growYes() {
             scale += 0.8;
-            const yesBtn = document.getElementById('yesBtn');
-            yesBtn.style.transform = `scale(${scale})`;
-            
-            const noBtn = document.getElementById('noBtn');
-            if (msgIndex < messages.length) {
-                noBtn.innerText = messages[msgIndex];
-                msgIndex++;
-            } else {
-                noBtn.style.display = 'none';
-            }
+            document.getElementById('yesBtn').style.transform = `scale(${scale})`;
+            const msgs = ["Jsi si jistá?", "Vážně ne?", "Zkus ANO! ✨"];
+            document.getElementById('noBtn').innerText = msgs[Math.floor(Math.random()*msgs.length)];
         }
-
         function celebrate() {
             document.body.innerHTML = `
-                <h1 style="color: #d63384; font-size: 4rem;">Jupííí! ❤️</h1>
-                <img src="https://img.freepik.com/free-vector/cute-bear-holding-heart-cartoon-vector-icon-illustration-animal-nature-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3503.jpg" style="width: 300px; border-radius: 20px;">
-                <h2 style="color: #ff477e; font-size: 2.5rem; margin-top: 20px;">Miluju tě! Nemůžu se dočkat! 🌹</h2>
+                <h1 style="color: #d63384; font-size: 3rem;">Jupííí! ❤️</h1>
+                <img src="https://img.freepik.com/free-vector/cute-bear-with-love-sign-cartoon-vector-icon-illustration_138676-2673.jpg" style="width: 250px; border-radius: 20px;">
+                <h2 style="color: #ff477e; margin-top: 20px;">Miluju tě!</h2>
             `;
-            // Exploze srdíček
-            for(let i=0; i<40; i++) {
-                setTimeout(createHeart, i * 30);
-            }
         }
-
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-            const size = Math.random() * 15 + 10 + "px";
-            heart.style.width = size;
-            heart.style.height = size;
+            heart.style.animationDuration = Math.random() * 2 + 3 + "s";
             document.body.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 5000);
         }
-
-        setInterval(createHeart, 250);
+        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
