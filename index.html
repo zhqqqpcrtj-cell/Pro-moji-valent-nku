@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budeš můj Valentýn?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffeef0; /* Světle růžové pozadí */
+            text-align: center;
+            overflow: hidden; /* Skryje srdíčka mimo obrazovku */
+            position: relative;
+        }
+        h1 {
+            color: #d63384; /* Sytě růžová pro nadpis */
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Jemný stín pro lepší čitelnost */
+            z-index: 10;
+        }
+        .buttons {
+            display: flex;
+            gap: 30px; /* Větší mezera mezi tlačítky */
+            align-items: center;
+            margin-top: 30px;
+            z-index: 10;
+        }
+        #yesBtn, #noBtn {
+            border: none;
+            padding: 18px 35px; /* Větší padding */
+            font-size: 22px; /* Větší písmo */
+            border-radius: 30px; /* Více zaoblené rohy */
+            cursor: pointer;
+            transition: all 0.3s ease; /* Plynulejší animace */
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Stín tlačítek */
+            letter-spacing: 1px;
+        }
+        #yesBtn {
+            background-color: #4CAF50; /* Zelená */
+            color: white;
+            transform-origin: center center; /* Pro zvětšování ze středu */
+        }
+        #yesBtn:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        #noBtn {
+            background-color: #F44336; /* Červená */
+            color: white;
+        }
+        #noBtn:hover {
+            background-color: #da190b;
+        }
+        img {
+            width: 250px; /* Větší obrázek */
+            height: auto;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25); /* Výraznější stín obrázku */
+            z-index: 10;
+        }
+
+        /* Styling pro padající srdíčka */
+        .heart {
+            position: absolute;
+            background-color: #ff69b4; /* Hot pink */
+            transform: rotate(-45deg);
+            animation: fall linear infinite;
+            pointer-events: none; /* Aby neblokovaly klikání */
+            z-index: 1; /* Pod ostatním obsahem */
+        }
+        .heart:before, .heart:after {
+            content: "";
+            position: absolute;
+            background-color: inherit;
+            border-radius: 50%;
+        }
+        .heart:before {
+            top: -50%;
+            left: 0;
+        }
+        .heart:after {
+            top: 0;
+            left: 50%;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(-45deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(-45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMXh3a3kwaGk3eWc4c2Zkb3Ixb284anF6c3NxdW53eGZtcnN6N2w1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kF2S3FqR6lI9PjP6o0/giphy.gif" alt="Cute Hearts GIF">
+    
+    <h1 id="question">Budeš můj Valentýn? ❤️</h1>
+
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">ANO</button>
+        <button id="noBtn" onclick="growYes()">NE</button>
+    </div>
+
+    <script>
+        let scale = 1;
+        const messages = [
+            "Jsi si jistá?", "Vážně?", "Nebuď taková...",
+            "Zkus to znovu!", "Slibuju, že budu hodný!",
+            "Poslední šance!", "Už mě trápíš :(",
+            "Prosíííím!", "Je to osud!", "Klikni na ANO!"
+        ];
+        let msgIndex = 0;
+
+        function growYes() {
+            scale += 0.4; // Zvětšení o něco méně, aby se to lépe řídilo
+            document.getElementById('yesBtn').style.transform = `scale(${scale})`;
+            
+            if (msgIndex < messages.length) {
+                document.getElementById('noBtn').innerText = messages[msgIndex];
+                msgIndex++;
+            } else {
+                // Pokud dojdou zprávy, resetuje se nebo se opakuje poslední
+                document.getElementById('noBtn').innerText = messages[messages.length - 1];
+            }
+        }
+
+        function celebrate() {
+            document.body.innerHTML = `
+                <h1 style="color: #d63384; font-size: 3.5rem;">Jupííí! ❤️ Těším se na tebe!</h1>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmF2ZWZ2MXpsZzV2M3p3NTR4OWtxMTNqOGZja3Q3dG53am53aW45NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lMCD8j3wSdu8h0oD1c/giphy.gif" style="width: 350px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.25);">
+                <div style="font-size: 1.5rem; color: #d63384; margin-top: 20px; z-index: 10;">Už se nemůžu dočkat!</div>
+            `;
+            // Zastaví padání srdíček, když se zobrazí gratulace
+            document.querySelectorAll('.heart').forEach(heart => heart.remove());
+        }
+
+        // Funkce pro generování srdíček
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const size = Math.random() * 20 + 10; // Velikost srdíčka
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            heart.style.left = `${Math.random() * 100}vw`; // Náhodná pozice X
+            heart.style.animationDuration = `${Math.random() * 3 + 4}s`; // Náhodná rychlost pádu
+            heart.style.opacity = '0'; // Start off-screen
+            document.body.appendChild(heart);
+
+            // Odstranění srdíčka po animaci
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        // Generování srdíček každých 300ms
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
