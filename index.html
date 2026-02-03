@@ -11,6 +11,7 @@
             background: radial-gradient(circle, #fff0f3 0%, #ffccd5 100%);
             overflow: hidden; position: relative; text-align: center;
         }
+        .bear-display { font-size: 100px; margin-bottom: 20px; z-index: 10; }
         h1 { color: #d63384; font-size: 2.2rem; z-index: 10; padding: 0 20px; }
         .buttons { display: flex; gap: 20px; margin-top: 30px; z-index: 10; align-items: center; justify-content: center; }
         #yesBtn, #noBtn {
@@ -20,7 +21,6 @@
         }
         #yesBtn { background-color: #ff477e; color: white; z-index: 12; }
         #noBtn { background-color: #999; color: white; z-index: 11; white-space: nowrap; }
-        .main-img { width: 220px; border-radius: 20px; margin-bottom: 20px; z-index: 10; }
 
         .heart {
             position: absolute; background-color: #ff4d6d;
@@ -41,10 +41,8 @@
     </style>
 </head>
 <body>
-    <img src="https://cdn.pixabay.com/photo/2016/11/14/04/14/teddy-bear-1822579_1280.png" class="main-img" id="bearImg">
-    
+    <div class="bear-display">🧸🌹</div>
     <h1 id="question">Budeš moje Valentýnka? ❤️</h1>
-    
     <div class="buttons">
         <button id="yesBtn" onclick="celebrate()">ANO</button>
         <button id="noBtn" onclick="growYes()">NE</button>
@@ -61,7 +59,8 @@
 
         function growYes() {
             scale += 0.8;
-            document.getElementById('yesBtn').style.transform = `scale(${scale})`;
+            const yesBtn = document.getElementById('yesBtn');
+            yesBtn.style.transform = `scale(${scale})`;
             const noBtn = document.getElementById('noBtn');
             if (msgIndex < messages.length) {
                 noBtn.innerText = messages[msgIndex];
@@ -73,10 +72,11 @@
 
         function celebrate() {
             document.body.innerHTML = `
+                <div style="font-size: 100px;">🎉💖</div>
                 <h1 style="color: #d63384; font-size: 3rem;">Jupííí! ❤️</h1>
-                <img src="https://cdn.pixabay.com/photo/2017/01/31/13/26/teddy-bear-2024023_1280.png" style="width: 250px;">
-                <h2 style="color: #ff477e; font-size: 2rem; margin-top: 20px;">Miluju tě! Nemůžu se dočkat! 🌹</h2>
+                <h2 style="color: #ff477e; font-size: 2rem; margin-top: 20px;">Miluju tě!</h2>
             `;
+            for(let i=0; i<40; i++) { setTimeout(createHeart, i * 100); }
         }
 
         function createHeart() {
